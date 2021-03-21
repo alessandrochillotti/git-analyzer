@@ -1,6 +1,9 @@
 package logic;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import org.eclipse.jgit.api.Git;
@@ -13,20 +16,25 @@ import org.eclipse.jgit.revwalk.RevCommit;
 public class GitAnalyzer {
 
 	private static final String URL = "https://github.com/alessandrochillotti/helloworld-git-analysis.git";
-	private static final String PATH = "C:\\Users\\aless\\github-sandboxes\\git-analysis-jgit";
 	private static final String STRING_TO_FOUND = "Added";
 	private static final Logger LOGGER = Logger.getLogger("Commit ID");
+	private static final String SANDBOX_FOLDER = "git-analysis";
 	
-	public static void main(String[] args)
-			throws IOException, InvalidRemoteException, TransportException, GitAPIException {
-
+	public static void main(String[] args) throws IOException, InvalidRemoteException, TransportException, GitAPIException {
 		GitAnalyzer rc = new GitAnalyzer();
-		rc.getCommitID(rc.getGit(URL, PATH), STRING_TO_FOUND);
+		rc.getCommitID(rc.getGit(URL, System.getProperty("user.home")), STRING_TO_FOUND);
+	}
+	
+	public String createFolder (String pathRoot, String folderName) throws IOException {
+		Path pathNewFolder = Paths.get(pathRoot + "\\" + folderName);
+		Files.createDirectories(pathNewFolder);
+		
+		return pathNewFolder.toString();
 	}
 
-	public Git getGit(String url, String pathDir) throws InvalidRemoteException, TransportException, GitAPIException, IOException {
+	public Git getGit(String url, String pathRoot) throws InvalidRemoteException, TransportException, GitAPIException, IOException {
 
-		File dir = new File(pathDir);
+		File dir = new File(createFolder(pathRoot, SANDBOX_FOLDER));
 		Git git;
 
 		// If the directory is not empty, then I refresh the directory
