@@ -1,9 +1,6 @@
 package logic;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import org.eclipse.jgit.api.Git;
@@ -25,16 +22,12 @@ public class GitAnalyzer {
 		rc.getCommitID(rc.getGit(URL, System.getProperty("user.home")), STRING_TO_FOUND);
 	}
 	
-	public String createFolder (String pathRoot, String folderName) throws IOException {
-		Path pathNewFolder = Paths.get(pathRoot + "\\" + folderName);
-		Files.createDirectories(pathNewFolder);
-		
-		return pathNewFolder.toString();
-	}
-
 	public Git getGit(String url, String pathRoot) throws InvalidRemoteException, TransportException, GitAPIException, IOException {
-
-		File dir = new File(createFolder(pathRoot, SANDBOX_FOLDER));
+		
+		// If SANDBOX_FOLDER don't exist in user path, then create it
+		new File(pathRoot, SANDBOX_FOLDER).mkdir();
+		File dir = new File(pathRoot, SANDBOX_FOLDER);
+		
 		Git git;
 
 		// If the directory is not empty, then I refresh the directory

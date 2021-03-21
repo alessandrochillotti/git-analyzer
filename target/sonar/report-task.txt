@@ -3,5 +3,5 @@ projectKey=alessandrochillotti_git-analyzer
 serverUrl=https://sonarcloud.io
 serverVersion=8.0.0.18399
 dashboardUrl=https://sonarcloud.io/dashboard?id=alessandrochillotti_git-analyzer
-ceTaskId=AXhP3NAomZyf4aDHs0DM
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXhP3NAomZyf4aDHs0DM
+ceTaskId=AXhUXm2VuOr-kSkptWCR
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXhUXm2VuOr-kSkptWCR
